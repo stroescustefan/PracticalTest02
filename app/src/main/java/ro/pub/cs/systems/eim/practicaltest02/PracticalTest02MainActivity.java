@@ -25,6 +25,9 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
     ImageView pokemonImage;
     private ServerThread serverThread;
 
+    Button getFirst20Entries;
+    TextView first20EntriesView;
+
     private GetInfoListener getInfoListener = new GetInfoListener();
     private class GetInfoListener implements View.OnClickListener {
 
@@ -34,7 +37,7 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
 
             Log.i(Constants.TAG, "[UI] Pokemon Name: " + pokemonName);
 
-            ClientAsyncTask clientAsyncTask = new ClientAsyncTask(abilitiesTextView, tipesTextView, pokemonImage);
+            ClientAsyncTask clientAsyncTask = new ClientAsyncTask(abilitiesTextView, tipesTextView, pokemonImage, first20EntriesView);
             clientAsyncTask.execute(pokemonName);
         }
     }
@@ -46,6 +49,15 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             serverThread = new ServerThread(Integer.parseInt(Constants.PORT.toString()));
             serverThread.startServer();
+        }
+    }
+
+    private PrintFirstEntries printFirstEntries = new PrintFirstEntries();
+    private class PrintFirstEntries implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            first20EntriesView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -63,6 +75,11 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
         pokemonImage = findViewById(R.id.imageView);
         startServerButton = findViewById(R.id.startServerButton);
         startServerButton.setOnClickListener(startServerListener);
+
+        getFirst20Entries = findViewById(R.id.getFirst20Button);
+        getFirst20Entries.setOnClickListener(printFirstEntries);
+        first20EntriesView = findViewById(R.id.textViewFirst20);
+
     }
 
     @Override

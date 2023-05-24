@@ -77,6 +77,27 @@ public class CommunicationThread extends Thread {
             printWriter.println(imageUrl);
             printWriter.flush();
 
+
+
+
+            HttpGet httpGet20 = new HttpGet("https://pokeapi.co/api/v2/pokemon");
+            HttpResponse httpGetResponse20 = httpClient.execute(httpGet20);
+            HttpEntity httpGetEntity20 = httpGetResponse20.getEntity();
+            String result20 = EntityUtils.toString(httpGetEntity20);
+            if (httpGetEntity20 != null) {
+                Log.i(Constants.TAG, result20);
+            }
+
+            JSONObject jsonObject20 = new JSONObject(result20);
+            List<String> first20Pokemons = new ArrayList<>();
+            JSONArray jsonArray20 = jsonObject20.getJSONArray("results");
+            for (int i = 0; i < 20; i++) {
+                first20Pokemons.add(jsonArray20.getJSONObject(i).getString("name"));
+            }
+            Log.i(Constants.TAG, first20Pokemons.toString());
+            printWriter.println(String.join(",", first20Pokemons));
+            printWriter.flush();
+
             socket.close();
             Log.v(Constants.TAG, "[COM THREAD] Connection closed");
         } catch (IOException | JSONException ioException) {

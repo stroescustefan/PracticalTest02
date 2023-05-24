@@ -79,5 +79,18 @@
                 android:layout_weight="1"
                 android:src="@mipmap/ic_launcher" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/getFirst20Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GET FIRST 20" />
+
+        <TextView
+            android:id="@+id/textViewFirst20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:visibility="invisible" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

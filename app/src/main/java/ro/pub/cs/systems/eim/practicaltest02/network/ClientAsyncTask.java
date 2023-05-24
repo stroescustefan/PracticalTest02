@@ -23,11 +23,13 @@ public class ClientAsyncTask extends AsyncTask<String, Object, Void> {
     TextView abilitiesTextView;
     TextView tipesTextView;
     ImageView pokemonImage;
+    TextView first20EntriesView;
 
-    public ClientAsyncTask(TextView abilitiesTextView, TextView tipesTextView, ImageView pokemonImage) {
+    public ClientAsyncTask(TextView abilitiesTextView, TextView tipesTextView, ImageView pokemonImage, TextView first20EntriesView) {
         this.abilitiesTextView = abilitiesTextView;
         this.tipesTextView = tipesTextView;
         this.pokemonImage = pokemonImage;
+        this.first20EntriesView = first20EntriesView;
     }
 
     @Override
@@ -69,8 +71,10 @@ public class ClientAsyncTask extends AsyncTask<String, Object, Void> {
                 throw new RuntimeException(e);
             }
 
+            String first20Pokemons = bufferedReader.readLine();
 
-            publishProgress(abilities, types, bmp);
+
+            publishProgress(abilities, types, bmp, first20Pokemons);
         } catch (IOException ioException) {
             Log.e(Constants.TAG, "An exception has occurred: " + ioException.getMessage());
             if (Constants.DEBUG) {
@@ -96,6 +100,7 @@ public class ClientAsyncTask extends AsyncTask<String, Object, Void> {
     protected void onPreExecute() {
         abilitiesTextView.setText("");
         tipesTextView.setText("");
+        first20EntriesView.setText("");
     }
 
     @Override
@@ -103,6 +108,7 @@ public class ClientAsyncTask extends AsyncTask<String, Object, Void> {
         abilitiesTextView.setText("Abilities: " + progress[0]);
         tipesTextView.setText("Types: " + progress[1]);
         pokemonImage.setImageBitmap((Bitmap) progress[2]);
+        first20EntriesView.setText("Pokemons: " + progress[3]);
     }
 
     @Override
