@@ -34,6 +34,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="GET INFO" />
+
+            <Button
+                android:id="@+id/startServerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="START SEVER" />
         </LinearLayout>
 
         <LinearLayout
